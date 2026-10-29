@@ -1,0 +1,62 @@
+kontakty = {}
+
+while True:
+    print("\n========== KSIAZKA KONTAKTOW ==========")
+    print("1. Dodaj kontakt")
+    print("2. Wyswietl wszystkie kontakty")
+    print("3. Wyszukaj kontakt")
+    print("4. Edytuj kontakt")
+    print("5. Usun kontakt")
+    print("0. Zakoncz")
+    print("=======================================")
+    opcja = input("Wybierz opcje: ")
+
+    if opcja == '1':
+        imie = input("Imie: ")
+        nazwisko = input("Nazwisko: ")
+        telefon = input("Telefon: ")
+        if telefon in kontakty:
+            print("Kontakt o tym numerze telefonu juz istnieje!")
+        else:
+            kontakty[telefon] = [imie, nazwisko]
+            print("Kontakt dodany.")
+
+    elif opcja == '2':
+        if not kontakty:
+            print("Ksiazka kontaktow jest pusta.")
+        else:
+            for telefon, dane in kontakty.items():
+                print(f"Telefon: {telefon} | Imie: {dane[0]} | Nazwisko: {dane[1]}")
+
+    elif opcja == '3':
+        telefon = input("Podaj numer telefonu do wyszukania: ")
+        if telefon in kontakty:
+            dane = kontakty[telefon]
+            print(f"Znaleziono: {dane[0]} {dane[1]}, Telefon: {telefon}")
+        else:
+            print("Nie znaleziono kontaktu o takim numerze.")
+
+    elif opcja == '4':
+        telefon = input("Podaj numer telefonu kontaktu do edycji: ")
+        if telefon in kontakty:
+            nowe_imie = input("Nowe imie: ")
+            nowe_nazwisko = input("Nowe nazwisko: ")
+            kontakty[telefon] = [nowe_imie, nowe_nazwisko]
+            print("Kontakt zaktualizowany.")
+        else:
+            print("Nie ma takiego kontaktu.")
+
+    elif opcja == '5':
+        telefon = input("Podaj numer telefonu do usuniecia: ")
+        if telefon in kontakty:
+            del kontakty[telefon]
+            print("Kontakt usuniety.")
+        else:
+            print("Nie ma takiego kontaktu.")
+
+    elif opcja == '0':
+        print("Koniec programu.")
+        break
+
+    else:
+        print("Nieznana opcja. Sprobuj ponownie.")
